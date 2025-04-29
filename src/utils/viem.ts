@@ -1,58 +1,42 @@
 import { createPublicClient, http, defineChain } from "viem";
-import {
-  mainnet,
-  base,
-  optimism,
-  bsc,
-  arbitrum,
-  avalanche,
-  celo,
-  polygon,
-} from "viem/chains";
+
+const blockdag_tesnet = defineChain({
+  id: 1043,
+  name: 'Primordial BlockDAG Testnet',
+  network: 'blockdag-testnet',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'BDAG',
+    symbol: 'BDAG',
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://rpc.primordial.bdagscan.com/'],
+      webSocket: ['wss://rpc.primordial.bdagscan.com/'],
+    },
+    public: {
+      http: ['https://rpc.primordial.bdagscan.com/'],
+      webSocket: ['wss://rpc.primordial.bdagscan.com/'],
+    },
+  },
+  blockExplorers: {
+    default: { name: 'Explorer', url: 'https://primordial.bdagscan.com/' },
+  },
+  contracts: {
+    multicall3: {
+      address: '0x26CC4A46484da4686c4D6E77767A6d7740F63f63',
+      blockCreated: 255092,
+    },
+  },
+})
 
 export enum ChainId {
-  ARBITRUM_ONE = 42161,
-  AVALANCHE = 43114,
-  BASE = 8453,
-  BLAST_MAINNET = 81457,
-  BSC = 56,
-  CELO = 42220,
-  MAINNET = 1,
-  MATIC = 137,
-  OPTIMISM = 10,
+  BLOCKDAG_TESTNET = 1043
 }
 
 export const publicClients = {
-  1: createPublicClient({
-    chain: mainnet,
+  1043: createPublicClient({
+    chain: blockdag_tesnet,
     transport: http(),
-  }),
-  42161: createPublicClient({
-    chain: arbitrum,
-    transport: http(),
-  }),
-  43114: createPublicClient({
-    chain: avalanche,
-    transport: http(),
-  }),
-  8453: createPublicClient({
-    chain: base,
-    transport: http(),
-  }),
-  56: createPublicClient({
-    chain: bsc,
-    transport: http(),
-  }),
-  42220: createPublicClient({
-    chain: celo,
-    transport: http(),
-  }),
-  137: createPublicClient({
-    chain: polygon,
-    transport: http(),
-  }),
-  10: createPublicClient({
-    chain: optimism,
-    transport: http(),
-  }),
+  })
 };

@@ -1,14 +1,12 @@
 # Uniswap V3 Indexer
 
 An multi-chain indexer for Uniswap V3 smart contracts.
-Built with [Envio](https://envio.dev/) by [Jack Landon](https://x.com/JackLandonX) of [SvelteKit.io](https://sveltekit.io).
+Built with [Envio](https://envio.dev/).
 Inspired by the [Uniswap V3 Subgraph](https://github.com/Uniswap/v3-subgraph).
 
 Supported chains:
 
-- **Ethereum** (`chainId`: 1)
-- **Arbitrum One** (`chainId`: 42161)
-- **Base Mainnet** (`chainId`: 8453)
+- **BlockDAG Testnet** (`chainId`: 1043)
 
 The indexer is flexible enough to support all chains that Uniswap V3 is deployed on.
 
@@ -22,7 +20,7 @@ The indexer is flexible enough to support all chains that Uniswap V3 is deployed
 ## Installation
 
 1. Clone the repository:
-   `git clone https://github.com/jack-landon/uniswap-v3-indexer.git`
+   `git clone https://github.com/MaxosLLC/uniswap-v3-indexer.git`
 2. Install dependencies:
    `cd uniswap-v3-indexer`
    `pnpm install`
@@ -62,7 +60,7 @@ Entities can be queried by their ID like this:
 
 ```graphql
 query GetFactory {
-  Factory_by_pk(id: "0x1F98431c8aD98523631AE4a59f267346ea31F984-1") {
+  Factory_by_pk(id: "0x13aA6774D72963A690bD43073a1B1a0AA21c9BA0-1043") {
     poolCount
     txCount
     totalVolumeUSD
@@ -81,8 +79,8 @@ query GetFactory {
   Factory(
     where: {
       _and: [
-        { chainId: { _eq: 1 } }
-        { address: { _eq: "0x1F98431c8aD98523631AE4a59f267346ea31F984" } }
+        { chainId: { _eq: 1043 } }
+        { address: { _eq: "0x13aA6774D72963A690bD43073a1B1a0AA21c9BA0" } }
       ]
     }
   ) {
@@ -98,50 +96,24 @@ which will return an **array** of factories that match the filter (even if it is
 
 _NOTE: each entity has a `chainId` field._
 
-#### ID's for other entities
-
-The above ID formatting applies to the following entities:
-
-- [`Factory`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L1),
-- [`Token`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L25),
-- [`Pool`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L51), and
-- [`Transaction`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L107),
-
-This is slightly different for the following entities:
-
-- [`Tick`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L93),
-- [`Mint`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L123),
-- [`Burn`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L143),
-- [`Swap`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L162),
-- [`Position`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L181),
-- [`Bundle`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L20),
-- [`UniswapDayData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L197),
-- [`PoolDayData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L210),
-- [`PoolHourData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L235),
-- [`TokenDayData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L259), and
-- [`TokenHourData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L277)
-
-which you can view by visiting the [schema](https://github.com/jack-landon/uniswap-v3-indexer/blob/main/schema.graphql) and referencing the comment of their respective ID field.
-
 ## Global Data
 
-Global data refers to data points about the Uniswap v3 protocol as a whole. Some examples of global data points are total value locked in the protocol, total pools deployed, or total transaction counts. Thus, to query global data you must pass in the Uniswap V3 **Factory** address `0x1F98431c8aD98523631AE4a59f267346ea31F984-1` and select the desired fields. Reference the full [factory schema](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L1) to see all possible fields.
+Global data refers to data points about the Uniswap v3 protocol as a whole. Some examples of global data points are total value locked in the protocol, total pools deployed, or total transaction counts. Thus, to query global data you must pass in the Uniswap V3 **Factory** address `0x13aA6774D72963A690bD43073a1B1a0AA21c9BA0-1043` and select the desired fields.
 
 **Factory ID's**:
 
 | **Chain Name**   | **chainId**                                      |
 | ---------------- | ------------------------------------------------ |
-| Ethereum Mainnet | 0x1F98431c8aD98523631AE4a59f267346ea31F984-1     |
-| Base Mainnet     | 0x33128a8fC17869897dcE68Ed026d694621f6FDfD-8453  |
-| Arbitrum One     | 0x1F98431c8aD98523631AE4a59f267346ea31F984-42161 |
+| BlockDAG testnet | 0x13aA6774D72963A690bD43073a1B1a0AA21c9BA0-1043  |
+
 
 ### Current Global Data
 
 An example querying total pool count, transaction count, and total volume in USD and ETH:
 
 ```graphql
-query GetFactoryEthereumMainnet {
-  Factory_by_pk(id: "0x1F98431c8aD98523631AE4a59f267346ea31F984-1") {
+query GetFactory {
+  Factory_by_pk(id: "0x13aA6774D72963A690bD43073a1B1a0AA21c9BA0-1043") {
     poolCount
     txCount
     totalVolumeUSD
@@ -157,8 +129,8 @@ The ID specification for this is:
 `timestamp rounded to current day by dividing by 86400 + "-" + chainId`.
 
 ```graphql
-query GetDayDataEthereumMainnet {
-  UniswapDayData_by_pk(id: "18800-1") {
+query GetDayData {
+  UniswapDayData_by_pk(id: "18800-1043") {
     txCount
     volumeETH
     volumeUSD
@@ -166,19 +138,17 @@ query GetDayDataEthereumMainnet {
 }
 ```
 
-All the fields for this entity are [here](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L197).
-
 ## Pool Data
 
-To get data about a certain pool, pass in the pool address. Reference the full [pool schema](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L51) and adjust the query fields to retrieve the data points you want.
+To get data about a certain pool, pass in the pool address.
 
 ### General Pool Query
 
 The query below returns the feeTier, spot price, and liquidity for the ETH-USDC pool.
 
 ```graphql
-query GetETHUSDCPoolEthereumMainnet {
-  Pool_by_pk(id: "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8-1") {
+query GetETHUSDCPool {
+  Pool_by_pk(id: "0xC79DA839Fd3044a477D6542A1e7B7c99B7dE7169-1043") {
     tick
     token0 {
       symbol
@@ -229,9 +199,9 @@ query Get10PoolsAfterFirst1000 {
 Retrieve the top 1000 most liquid pools on Eth Mainnet. You can use this similar set up to orderBy other variables like number of swaps or volume.
 
 ```graphql
-query Get1000MostLiquidPoolsOnEthMainnet {
+query Get1000MostLiquidPools {
   Pool(
-    where: { chainId: { _eq: 1 } }
+    where: { chainId: { _eq: 1043 } }
     limit: 1000
     order_by: { liquidity: desc }
   ) {
@@ -254,7 +224,7 @@ query UNIETHAfterTimestamp {
         { date: { _gt: 1633642435 } }
         {
           pool: {
-            address: { _eq: "0x1d42064fc4beb5f8aaf85f4617ae8b3b5b8bd801" }
+            address: { _eq: "0xC79DA839Fd3044a477D6542A1e7B7c99B7dE7169" }
           }
         }
       ]
@@ -276,15 +246,14 @@ query UNIETHAfterTimestamp {
 ### General Swap Data
 
 To query data about a particular swap, input the:
-`transaction hash` + "-" + `chainId` + "#" + index in swaps Transaction array.
-This is the reference for the full [swap schema](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L162).
+`transaction hash` + "-" + index in swaps Transaction array + "-" + `chainId`.
 
 This query fetches data about the sender, receiver, amounts, transaction data, and timestamp for a particular swap.
 
 ```graphql
 query GetSwap {
   Swap_by_pk(
-    id: "0x000007e1111cbd97f74cfc6eea2879a5b02020f26960ac06f4af0f9395372b64-1#66785"
+    id: "0xf5749c498ede7440464dde7f82afa253c84b9780385fa4fada7f7256080abbf3-2-1043"
   ) {
     sender
     recipient
@@ -318,10 +287,10 @@ query GetRecentSwaps {
   Swap(
     where: {
       _and: [
-        { chainId: { _eq: 1 } }
+        { chainId: { _eq: 1043 } }
         {
           pool: {
-            address: { _eq: "0x7858e59e0c01ea06df3af3d20ac7b0003275d4bf" }
+            address: { _eq: "0xC79DA839Fd3044a477D6542A1e7B7c99B7dE7169" }
           }
         }
       ]
@@ -354,11 +323,11 @@ Input the the token contract address to fetch token data. Any token that exists 
 
 ### General Token Data
 
-This queries the decimals, symbol, name, pool count, and volume in USD for the UNI token. Reference the full [token schema](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L25) for all possible fields you can query.
+This queries the decimals, symbol, name, pool count, and volume in USD for the UNI token.
 
 ```graphql
-query GetUSDCEthMainnet {
-  Token_by_pk(id: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984-1") {
+query GetUSDCEth {
+  Token_by_pk(id: "0x38e659126AeB5dE4C243229b34Bd99f11D5bb2D3-1043") {
     address
     symbol
     name
@@ -379,10 +348,10 @@ query Get10DaysOfTokenData {
     limit: 10
     where: {
       _and: [
-        { chainId: { _eq: 1 } }
+        { chainId: { _eq: 1043 } }
         {
           token: {
-            address: { _eq: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" }
+            address: { _eq: "0x38e659126AeB5dE4C243229b34Bd99f11D5bb2D3" }
           }
         }
       ]
@@ -405,8 +374,8 @@ query Get10DaysOfTokenData {
 Similar to retrieving all pools, you can fetch all tokens by using `offset`.
 
 ```graphql
-query GetTokensOnEthMainnet {
-  Token(offset: 1000, limit: 10, where: { chainId: { _eq: 1 } }) {
+query GetTokens {
+  Token(offset: 1, limit: 10, where: { chainId: { _eq: 1043 } }) {
     address
     symbol
     name
@@ -423,8 +392,8 @@ The `Bundle` entity stores the most up to date price of Eth in USD.
 The `id` of each bundle is the `chainId`, as there will be 1 `bundle` per chain.
 
 ```graphql
-query GetEthPriceEthMainnet {
-  Bundle_by_pk(id: "1") {
+query GetEthPrice {
+  Bundle_by_pk(id: "1043") {
     ethPriceUSD
   }
 }
@@ -437,9 +406,9 @@ query GetEthPriceEthMainnet {
 To get the most recent mints, the `Mint` entity should be queried. This query fetches the last 10 liquidity mints on the Ethereum Mainnet.
 
 ```graphql
-query GetLast10MintsEthMainnet {
+query GetLast10Mints {
   Mint(
-    where: { chainId: { _eq: 1 } }
+    where: { chainId: { _eq: 1043 } }
     order_by: { timestamp: desc }
     limit: 10
   ) {
@@ -461,14 +430,12 @@ query GetLast10MintsEthMainnet {
 }
 ```
 
-View the [`Mint`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L123) schema to see all possible fields.
-
 ### Recent Burn Data
 
 ```graphql
-query GetLast10BurnsEthMainnet {
+query GetLast10Burns {
   Burn(
-    where: { chainId: { _eq: 1 } }
+    where: { chainId: { _eq: 1043 } }
     order_by: { timestamp: desc }
     limit: 10
   ) {
@@ -497,9 +464,9 @@ When a liquidity provider collects their fees, the `Collect` event will be emitt
 These collection events can be queried as follows:
 
 ```graphql
-query GetLast10CollectsEthMainnet {
+query GetLast10Collects {
   Collect(
-    where: { chainId: { _eq: 1 } }
+    where: { chainId: { _eq: 1043 } }
     order_by: { timestamp: desc }
     limit: 10
   ) {
@@ -534,11 +501,11 @@ Every transaction on Uniswap V3 is indexed. You can query transaction data by th
 You can also get nested data for fields such as swaps, mints, and burns.
 
 ```graphql
-query GetLast10TxnsEthMainnet {
+query GetLast10Txns {
   Transaction(
     limit: 10
     order_by: { timestamp: desc }
-    where: { chainId: { _eq: 1 } }
+    where: { chainId: { _eq: 1043 } }
   ) {
     transactionHash
     blockNumber
@@ -557,8 +524,6 @@ query GetLast10TxnsEthMainnet {
 }
 ```
 
-View the [`Transaction`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L107) schema for all possible fields.
-
 ## Hourly Data
 
 ### Fetch Pool Hourly Data
@@ -566,14 +531,14 @@ View the [`Transaction`](https://github.com/jack-landon/uniswap-v3-indexer/blob/
 To get the data for the UNI-ETH pool on Eth Mainnet the last 6 logged hours, you can query the `PoolHourData` entity.
 
 ```graphql
-query GetLast6HoursOfUniEthPoolOnEthMainnet {
+query GetLast6HoursOfUniEthPool {
   PoolHourData(
     where: {
       _and: [
-        { chainId: { _eq: 1 } }
+        { chainId: { _eq: 1043 } }
         {
           pool: {
-            address: { _eq: "0x1d42064fc4beb5f8aaf85f4617ae8b3b5b8bd801" }
+            address: { _eq: "0xC79DA839Fd3044a477D6542A1e7B7c99B7dE7169" }
           }
         }
       ]
@@ -590,21 +555,19 @@ query GetLast6HoursOfUniEthPoolOnEthMainnet {
 }
 ```
 
-Visit the [`PoolHourData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L235) schema for all the possible fields.
-
 ### Fetch Token Hourly Data
 
 Similarly to the `PoolHourData`, the hourly token data can be queried with the `TokenHourData` entity.
 
 ```graphql
-query GetLast6HoursOfUniTokenOnEthMainnet {
+query GetLast6HoursOfUniToken {
   TokenHourData(
     where: {
       _and: [
-        { chainId: { _eq: 1 } }
+        { chainId: { _eq: 1043 } }
         {
           token: {
-            address: { _eq: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984" }
+            address: { _eq: "0x38e659126AeB5dE4C243229b34Bd99f11D5bb2D3" }
           }
         }
       ]
@@ -626,8 +589,6 @@ query GetLast6HoursOfUniTokenOnEthMainnet {
 }
 ```
 
-Visit the [`TokenHourData`](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L277) schema for all the possible fields.
-
 ## Multi-Chain Queries
 
 Since the indexer is multi-chain, you can aggregate and query data.
@@ -635,8 +596,6 @@ Since the indexer is multi-chain, you can aggregate and query data.
 Below are a few examples of how to get useful insights across multiple chains.
 
 ### Most liquid pools across supported chains
-
-Retrieve the top 1,000 most liquid pools. This can be ordered by other properties like `txCount`, `volumeUSD`, `feesUSD` and any other property of the [`Pool` schema](https://github.com/jack-landon/uniswap-v3-indexer/blob/086115c374e2c724c12bbb67be975daf83286d89/schema.graphql#L51).
 
 ```graphql
 query GetHighestLiquidityPoolsCrossChain {

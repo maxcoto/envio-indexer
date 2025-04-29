@@ -130,7 +130,7 @@ type Mint {
   token1: Token! # allow indexing by tokens
   owner: Bytes! # owner of position where liquidity minted to
   sender: Bytes # the address that minted the liquidity
-  origin: Bytes # txn origin - the EOA that initiated the txn
+  origin: Bytes! # txn origin - the EOA that initiated the txn
   amount: BigInt! # amount of liquidity minted
   amount0: BigDecimal! # amount of token 0 minted
   amount1: BigDecimal! # amount of token 1 minted
@@ -149,7 +149,7 @@ type Burn {
   token1: Token! # allow indexing by tokens
   timestamp: BigInt! # need this to pull recent txns for specific token or pool
   owner: Bytes # owner of position where liquidity was burned
-  origin: Bytes # txn origin - the EOA that initiated the txn
+  origin: Bytes! # txn origin - the EOA that initiated the txn
   amount: BigInt! # amouny of liquidity burned
   amount0: BigDecimal! # amount of token 0 burned
   amount1: BigDecimal! # amount of token 1 burned
@@ -169,7 +169,7 @@ type Swap {
   token1: Token! # allow indexing by tokens
   sender: Bytes! # sender of the swap
   recipient: Bytes! # recipient of the swap
-  origin: Bytes # txn origin - the EOA that initiated the txn
+  origin: Bytes! # txn origin - the EOA that initiated the txn
   amount0: BigDecimal! # delta of token0 swapped
   amount1: BigDecimal! # delta of token1 swapped
   amountUSD: BigDecimal! # derived info

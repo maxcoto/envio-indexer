@@ -8,7 +8,6 @@ import {
 } from "generated";
 import { ONE_BI, ZERO_BD } from "./utils/constants";
 import {
-  Address,
   convertTokenToDecimal,
   getFactoryAddress,
   getFromId,
@@ -153,7 +152,7 @@ UniswapV3Pool.Burn.handler(async ({ event, context }) => {
       token0_id: pool.token0_id,
       token1_id: pool.token1_id,
       owner: event.params.owner,
-      origin: event.transaction.from,
+      origin: event.params.owner,
       amount: event.params.amount,
       amount0: amount0,
       amount1: amount1,
@@ -923,7 +922,7 @@ UniswapV3Pool.Mint.handler(async ({ event, context }) => {
       token1_id: pool.token1_id,
       owner: event.params.owner,
       sender: event.params.sender,
-      origin: event.transaction.from,
+      origin: event.params.sender,
       amount: event.params.amount,
       amount0: amount0,
       amount1: amount1,
@@ -1395,7 +1394,7 @@ UniswapV3Pool.Swap.handler(async ({ event, context }) => {
       token0_id: pool.token0_id,
       token1_id: pool.token1_id,
       sender: event.params.sender,
-      origin: event.transaction.from,
+      origin: event.params.sender,
       recipient: event.params.recipient,
       amount0: amount0,
       amount1: amount1,

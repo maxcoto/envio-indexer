@@ -38,7 +38,6 @@ export async function fetchTokenName(
   chainId: keyof typeof publicClients
 ): Promise<string> {
   // try with the static definition
-  console.log("Fetching Token Name");
   const staticTokenDefinition = getStaticDefinition(address, tokenOverrides);
   if (staticTokenDefinition != null) {
     return staticTokenDefinition.name;

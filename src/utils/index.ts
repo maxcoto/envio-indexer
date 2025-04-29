@@ -7,7 +7,7 @@ import {
   // UniswapV3PoolContract_MintEvent_handlerContextAsync,
   // UniswapV3PoolContract_SwapEvent_handlerContextAsync,
 } from "generated";
-import { ONE_BD, ZERO_BD, ZERO_BI } from "../utils/constants";
+import { ZERO_BD, ZERO_BI } from "../utils/constants";
 import { getChainConfig } from "./chains";
 
 export type Address = `0x${string}`;
