@@ -27,6 +27,7 @@ The indexer is flexible enough to support all chains that Uniswap V3 is deployed
 3. Run Codegen:
    `pnpm run codegen`
 
+
 ## Usage
 
 Start the indexer:
