@@ -61,23 +61,24 @@ export function getChainConfig(chainId: number): SubgraphConfig {
     return {
       factoryAddress: "0x13aA6774D72963A690bD43073a1B1a0AA21c9BA0",
       stablecoinWrappedNativePoolAddress:
-        "0xC79DA839Fd3044a477D6542A1e7B7c99B7dE7169", // WETH-USDC 0.3% pool
+        "0x3AB2f9bA424c52e554458305E1535802D8e26CE4", // WETH-USDC 0.3% pool
       stablecoinIsToken0: true,
       wrappedNativeAddress: "0xC97B4e92fB267bB11b1CD2d475F9E8c16b433289", // WETH
       minimumNativeLocked: BigDecimal("20"),
       stablecoinAddresses: [
-        "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8", // USDC
-        "0x38e659126AeB5dE4C243229b34Bd99f11D5bb2D3", // USDT
+        "0x564309ecFB8ed7188ECd59eCfb320F7fDac135e0", // USDC
+        "0x5e53deEbed3097d3c246FB6Bc1f45066C1042435", // DAI
       ],
       whitelistTokens: [
         "0xC97B4e92fB267bB11b1CD2d475F9E8c16b433289", // WETH
-        "0x38e659126AeB5dE4C243229b34Bd99f11D5bb2D3", // USDT
+        "0x564309ecFB8ed7188ECd59eCfb320F7fDac135e0", // USDC
+        "0x5e53deEbed3097d3c246FB6Bc1f45066C1042435", // DAI
       ],
       tokenOverrides: STATIC_TOKEN_DEFINITIONS[BLOCKDAG_TESTNET_ID],
       poolsToSkip: [],
       poolMappings: [],
       tokensToSkip: [],
-    };
+    }
   } else {
     throw new Error("Unsupported Network");
   }

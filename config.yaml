@@ -1,5 +1,6 @@
 # yaml-language-server: $schema=./node_modules/envio/evm.schema.json
 name: Uniswap V3 Indexer
+raw_events: true
 field_selection:
   transaction_fields:
     - "hash"
